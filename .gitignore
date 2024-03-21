@@ -1,0 +1,7 @@
+# 특정 경로안의 폴더 제외
+Astrobee-ISS-Datasets
+ 
+# 해당 확장자 파일 전체 제외
+*.zip
+*.png
+ 
