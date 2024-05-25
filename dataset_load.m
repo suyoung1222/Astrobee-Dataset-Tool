@@ -11,7 +11,6 @@
 function dataset = dataset_load(datasetPath)
 
 dataset = [];
-dataset.robot = {};
 
 
 
@@ -25,7 +24,7 @@ for iFolderRobot = 1:NFolderRobot
     switch datasetFolderContent(iFolderRobot).name
         case 'description.yaml'
             description = readyaml([datasetPath,'/description.yaml']);
-            dataset.robotName = description.robot;
+            dataset.robot = description.robot;
             dataset.recordedDate = description.recorded_date;
             dataset.flyingArea = description.flying_area;
             dataset.category = description.category;
@@ -59,10 +58,9 @@ for iFolderRobot = 1:NFolderRobot
         case 'imu_filtered.txt'
             dataset.imu_filtered = readmatrix([datasetPath,'/imu_filtered.txt'], 'Delimiter',  ' ');
 
-        case %body frame관ㄱ계들
         
 
-
+        
         otherwise
             disp('other value')
 
@@ -71,10 +69,16 @@ for iFolderRobot = 1:NFolderRobot
 end
 
 %% Astrobee information
-if (dataset.robotName == 'bumblebee')
-    bodyT
-else if(dataset.robotName == 'queenbee')
-    bodyT
+if (dataset.robot == 'bumblebee')
+    dataset.Rcam_to_body = [0 0 1; 1 0 0; 0 1 0];
+    dataset.pcam_to_body = [0.1177; -0.0422; -0.0826];
+    dataset.Rimu_to_body = [0 -1 0; 1 0 0; 0 0 1];
+    dataset.pimu_to_body = [0.0386; 0.0247; -0.01016];
+else if(dataset.robot == 'queenbee') % TODO: Update the value from astrobee original github
+    dataset.Rcam_to_body = [0 0 1; 1 0 0; 0 1 0];
+    dataset.pcam_to_body = [0.1177; -0.0422; -0.0826];
+    dataset.Rimu_to_body = [0 -1 0; 1 0 0; 0 0 1];
+    dataset.pimu_to_body = [0.0386; 0.0247; -0.01016];
 end
 
 assert(~isempty(dataset_load.body));
