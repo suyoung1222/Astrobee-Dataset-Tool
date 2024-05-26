@@ -13,13 +13,12 @@ clear variables; %clear classes;
 
 addpath('quaternion');
 addpath('readyaml');
-addpath('colladaParser');
 
 % set draw option
 set_body = 0; % 0: navcam, 1: IMU, 2:body
 
 % set dataset folder
-datasetPath = './Astrobee-ISS-Datasets/ff_return_journey_up';
+datasetPath = './Astrobee-ISS-Datasets/ff_return_journey_rot';
 disp(' ');
 disp([' > dataset_load_test [', datasetPath, ']']);
 
@@ -51,7 +50,7 @@ disp(['     comment [', description.comment, ']']);
 %% plot sensor configuration
 figure();
 sensor_plot(Tcam_to_body, Timu_to_body);
-title("Sensor Configurations");
+title("Sensor Configurations", 'Position', [0, 0, -0.09]);
 f = FigureRotator();
 %% plot IMU state
 imu_raw_time = ( imu_raw(:, 1) - imu_raw(1, 1) );
@@ -135,7 +134,7 @@ for k = 1:numPose
 end
 
 figure(20);
-for k = 1:100:numPose
+for k = 1:50:numPose
     plot3(p_gc_astro(:, 1), p_gc_astro(:, 2), p_gc_astro(:, 3), 'm', 'LineWidth', 2); hold on; grid on; axis equal;
     Rgc_astro_current = R_gc_astro(:, :, k);
     pgc_astro_current = p_gc_astro(k, :);
