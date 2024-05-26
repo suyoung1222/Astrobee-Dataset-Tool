@@ -35,13 +35,12 @@ description = readyaml([datasetPath,'/description.yaml']);
 if (description.robot == 'bumblebee')
     Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
     Timu_to_body = [0 -1 0 0.0386; 1 0 0 0.0247; 0 0 1 -0.01016];
-elseif(description.robot == 'queenbee') % TODO: Update the value from astrobee original github
+elseif(description.robot == 'queenbee')
     Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
-    Timu_to_body = [0 -1 0 0.0386; 1 0 0 0.0247; 0 0 1 -0.01016];
+    Timu_to_body = [0 -1 0 0.0247; 1 0 0 0.0183; 0 0 1 0.0094];
 end
 
-%% read description
-description = readyaml([datasetPath,'/description.yaml']);
+%% view description
 disp("==============Dataset Description==============");
 disp(['     robot name [', description.robot, ']']);
 disp(['     recorded date [', description.recorded_date, ']']);
