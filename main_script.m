@@ -15,8 +15,7 @@ addpath('quaternion');
 addpath('readyaml');
 
 % set draw option
-set_body = 0; % 0: navcam, 1: IMU, 2:body
-
+set_robot = 'bumblebee';
 % set dataset folder
 datasetPath = './Astrobee-ISS-Datasets/ff_return_journey_rot';
 disp(' ');
@@ -30,22 +29,20 @@ imu_raw = readmatrix([datasetPath,'/imu.txt'], 'Delimiter',  ' ');
 imu_filtered = readmatrix([datasetPath,'/imu_filtered.txt'], 'Delimiter',  ' ');
 gt_trajectory = readmatrix([datasetPath,'/groundtruth.txt'], 'Delimiter',  ' ');
 % astroloc_trajectory = readmatrix();
-description = readyaml([datasetPath,'/description.yaml']);
-if (description.robot == 'bumblebee')
+% description = readyaml([datasetPath,'/description.yaml']);
+
+if (set_robot == 'bumblebee')
     Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
     Timu_to_body = [0 -1 0 0.0386; 1 0 0 0.0247; 0 0 1 -0.01016];
-elseif(description.robot == 'queenbee')
-    Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
-    Timu_to_body = [0 -1 0 0.0247; 1 0 0 0.0183; 0 0 1 0.0094];
 end
 
 %% view description
-disp("==============Dataset Description==============");
-disp(['     robot name [', description.robot, ']']);
-disp(['     recorded date [', description.recorded_date, ']']);
-disp(['     flying area [', description.flying_area, ']']);
-disp(['     category [', description.category, ']']);
-disp(['     comment [', description.comment, ']']);
+% disp("==============Dataset Description==============");
+% disp(['     robot name [', description.robot, ']']);
+% disp(['     recorded date [', description.recorded_date, ']']);
+% disp(['     flying area [', description.flying_area, ']']);
+% disp(['     category [', description.category, ']']);
+% disp(['     comment [', description.comment, ']']);
 
 %% plot sensor configuration
 figure();

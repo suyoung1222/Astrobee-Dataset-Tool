@@ -1,6 +1,6 @@
 robot: bumblebee
 rosbag: 20160211_1701_nav_sampled_shortened_results.bag
-recorded_date: Feb 12 2016
-flying_area: JEM module
+record date: Feb 12 2016
+flying area: JEM module
 category: Free
 comment: return journey along the JEM module while continuously rotating
