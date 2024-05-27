@@ -15,7 +15,7 @@ addpath('quaternion');
 addpath('readyaml');
 
 % set draw option
-set_robot = 'bumblebee';
+set_robot = 'bumblebee'; % queenbee
 % set dataset folder
 datasetPath = './Astrobee-ISS-Datasets/ff_return_journey_rot';
 disp(' ');
@@ -34,6 +34,9 @@ gt_trajectory = readmatrix([datasetPath,'/groundtruth.txt'], 'Delimiter',  ' ');
 if (set_robot == 'bumblebee')
     Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
     Timu_to_body = [0 -1 0 0.0386; 1 0 0 0.0247; 0 0 1 -0.01016];
+elseif(set_robot == 'queenbee')
+    Tcam_to_body = [0 0 1 0.1177; 1 0 0 -0.0422; 0 1 0 -0.0826];
+    Timu_to_body = [0 -1 0 0.0247; 1 0 0 0.0183; 0 0 1 0.0094];
 end
 
 %% view description
@@ -160,7 +163,7 @@ function sensor_plot(Tbc, Tbi)
             C_BS = Tbi(1:3, 1:3);
         end
         q_SB = q_C2q(C_BS);
-        q_plotPose(p_BS_B, q_SB, sensor_name, 0.015);
+        q_plotPose(p_BS_B, q_SB, sensor_name, 0.03);
         plot3([0, p_BS_B(1)], [0, p_BS_B(2)], [0, p_BS_B(3)], 'k');
         axis equal; view(-90, 180);
     
